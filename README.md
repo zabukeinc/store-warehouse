@@ -20,7 +20,7 @@ Get specific data store (GET) : <i>http://localhost:3000/api/store/:id</i>
 Get specific data warehouse (GET) : <i>http://localhost:3000/api/warehouse/:id</i>
 <br><br>
 (body: x-www-form-urlencoded) <br>
-Insert data Store + Auto generated data warehouse (POST) : <i>http://localhost:3000/api/store/</i> <br>
+Insert data Store + Auto generated data warehouse (POST) : <i>http://localhost:3000/api/store/</i>
 <br>
 Insert data Warehouse (POST) : <i>http://localhost:3000/api/warehouse/</i>
 <br><br>
