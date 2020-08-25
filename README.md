@@ -13,6 +13,7 @@ First, you need to run mongodb client on your machine.
 <b>b. Endpoint </b> <br>
 Get all data store (GET) <i>http://localhost:3000/api/store</i>
 <br>
+<b>GET By warehouse_code and store_code</b>
 Get all data warehouse (GET) : <i>http://localhost:3000/api/warehouse</i>
 <br><br>
 Get specific data store (GET) : <i>http://localhost:3000/api/store/:id</i>
@@ -24,10 +25,13 @@ Insert data Store + Auto generated data warehouse (POST) : <i>http://localhost:3
 <br>
 Insert data Warehouse (POST) : <i>http://localhost:3000/api/warehouse/</i>
 <br><br>
+
+<b>Update by _ID</b><br>
 Update data store (PUT) : <i>http://localhost:3000/api/store/:id</i>
 <br>
 Update data warehouse (PUT) : <i>http://localhost:3000/api/warehouse/:id</i>
 <br><br>
+<b>Delete by _ID</b><br>
 Delete data store (DELETE) <i>http://localhost:3000/api/store/:id</i>
 <br>
 Delete data warehouse (DELETE) <i>http://localhost:3000/api/warehouse/:id</i>
