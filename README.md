@@ -13,7 +13,7 @@ First, you need to run mongodb client on your machine.
 <b>b. Endpoint </b> <br>
 Get all data store (GET) <i>http://localhost:3000/api/store</i>
 <br>
-<b>GET By warehouse_code and store_code</b>
+<b>GET By warehouse_code and store_code</b> <br>
 Get all data warehouse (GET) : <i>http://localhost:3000/api/warehouse</i>
 <br><br>
 Get specific data store (GET) : <i>http://localhost:3000/api/store/:id</i>
