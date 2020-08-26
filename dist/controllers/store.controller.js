@@ -63,13 +63,55 @@ class StoreController {
                     status: true,
                     message: "Data successfully added",
                 });
-                const newWarehouse = new warehouse_model_1.Warehouse(newStore);
-                newWarehouse.save();
+                const newWarehouse = new warehouse_model_1.Warehouse(req.body);
+                newWarehouse.save((err, warehouse) => {
+                    console.log("Added to warehouse");
+                });
             }
         });
     }
-    update() { }
-    delete() { }
+    update(req, res) {
+        const storeId = req.params.id;
+        if (storeId) {
+            store_model_1.Store.findByIdAndUpdate(storeId, req.body, (err, store) => {
+                if (err) {
+                    res.status(404).json({
+                        status: false,
+                        message: "Data not found",
+                    });
+                }
+                if (store) {
+                    res.status(200).json({
+                        status: true,
+                        message: "Data has been updated",
+                    });
+                }
+            });
+        }
+    }
+    delete(req, res) {
+        const storeId = req.params.id;
+        store_model_1.Store.findByIdAndDelete(storeId, (err, deleted) => {
+            if (err)
+                res.status(500).json({
+                    status: false,
+                    message: "Something went wrong",
+                });
+            if (deleted) {
+                res.status(204).json({
+                    status: true,
+                    message: "Data has been deleted.",
+                    data: deleted,
+                });
+            }
+            else {
+                res.status(404).json({
+                    status: false,
+                    message: "Data not found",
+                });
+            }
+        });
+    }
 }
 exports.StoreController = StoreController;
 //# sourceMappingURL=store.controller.js.map

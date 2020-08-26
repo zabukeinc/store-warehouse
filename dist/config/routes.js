@@ -1,18 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Routes = void 0;
-// import { WarehouseController } from "../controllers/warehouse.controller";
-const store_controller_1 = require("../controllers/store.controller");
+const warehouse_controller_1 = require("../controllers/warehouse.controller");
 class Routes {
     constructor() {
-        // public warehoueController: WarehouseController = new WarehouseController();
-        this.storeController = new store_controller_1.StoreController();
+        this.warehoueController = new warehouse_controller_1.WarehouseController();
     }
     routes(app) {
+        /**
+         * Warehouse Routes
+         */
         app
-            .route("api/store")
-            .get(this.storeController.index)
-            .post(this.storeController.create);
+            .route("/api/warehouse")
+            .get(this.warehoueController.index)
+            .post(this.warehoueController.create);
+        app
+            .route("/api/warehouse/:api")
+            .get(this.warehoueController.show)
+            .put(this.warehoueController.update)
+            .delete(this.warehoueController.delete);
+        app.all("*", function (req, res) {
+            res.status(404).send({
+                status: false,
+                message: "Endpoint not found",
+            });
+        });
     }
 }
 exports.Routes = Routes;
