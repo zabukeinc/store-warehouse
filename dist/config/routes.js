@@ -11,14 +11,21 @@ class Routes {
          * Warehouse Routes
          */
         app
-            .route("/api/warehouse")
+            .route("/api/warestore")
             .get(this.warehoueController.index)
             .post(this.warehoueController.create);
         app
-            .route("/api/warehouse/:api")
+            .route("/api/warestore/store")
+            .get(this.warehoueController.showOnlyStore);
+        app
+            .route("/api/warestore/warehouse")
+            .get(this.warehoueController.showOnlyWarehouse);
+        app
+            .route("/api/warestore/:id")
             .get(this.warehoueController.show)
             .put(this.warehoueController.update)
             .delete(this.warehoueController.delete);
+        // get data by types
         app.all("*", function (req, res) {
             res.status(404).send({
                 status: false,

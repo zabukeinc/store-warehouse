@@ -21,7 +21,57 @@ class WarehouseController {
                 });
             }
         })
-            .catch((err) => res.status(500).json({ status: false, message: "Something went wrong" }));
+            .catch((err) => res.status(500).json({ status: false, message: err.message }));
+    }
+    showOnlyStore(req, res) {
+        warehouse_model_1.Warehouse.findAll({ where: { is_store: 1 } })
+            .then((warehouse) => {
+            if (warehouse) {
+                res.status(200).json({
+                    status: true,
+                    message: "Get all data store",
+                    data: warehouse,
+                });
+            }
+            else {
+                res.status(404).json({
+                    status: true,
+                    message: "Data store is empty",
+                    data: warehouse,
+                });
+            }
+        })
+            .catch((err) => {
+            res.status(500).json({
+                status: false,
+                message: err.message,
+            });
+        });
+    }
+    showOnlyWarehouse(req, res) {
+        warehouse_model_1.Warehouse.findAll({ where: { is_store: 0 } })
+            .then((warehouse) => {
+            if (warehouse) {
+                res.status(200).json({
+                    status: true,
+                    message: "Get all data warehouse",
+                    data: warehouse,
+                });
+            }
+            else {
+                res.status(404).json({
+                    status: true,
+                    message: "Data warehouse is empty",
+                    data: warehouse,
+                });
+            }
+        })
+            .catch((err) => {
+            res.status(500).json({
+                status: false,
+                message: err.message,
+            });
+        });
     }
     show(req, res) {
         const warehouseCode = req.params.id;
@@ -39,7 +89,7 @@ class WarehouseController {
                 else {
                     res.status(404).json({
                         status: false,
-                        message: "Data is empty",
+                        message: "Data not found",
                         data: warehouse,
                     });
                 }
@@ -47,7 +97,7 @@ class WarehouseController {
                 .catch((err) => {
                 res.status(500).json({
                     status: false,
-                    message: "Something went wrong",
+                    message: err.message,
                 });
             });
         }
@@ -68,26 +118,46 @@ class WarehouseController {
                     });
                 }
             })
-                .catch((err) => res
-                .status(500)
-                .json({ status: false, message: "Something went wrong" }));
+                .catch((err) => res.status(500).json({ status: false, message: err.message }));
         }
     }
     create(req, res) {
         const params = req.body;
-        warehouse_model_1.Warehouse.create(params)
-            .then((warehouse) => {
-            res.status(201).json({
-                status: true,
-                message: "Data sucessfully added",
+        // Logic for Add Store + Generate Warehouse
+        if ((params.is_store = true)) {
+            warehouse_model_1.Warehouse.create(params)
+                .then((warehouse) => {
+                params.warehouse_code = `${warehouse.warehouse_code}-Warehouse`;
+                warehouse_model_1.Warehouse.create(params).then(() => {
+                    res.status(201).json({
+                        status: true,
+                        message: "Data store and warehouse sucessfully added",
+                    });
+                });
+            })
+                .catch((err) => {
+                res.status(500).json({
+                    status: false,
+                    message: err.message,
+                });
             });
-        })
-            .catch((err) => {
-            res.status(500).json({
-                status: false,
-                message: "Failed to add data",
+        }
+        else {
+            // Logic for Only add warehouse
+            warehouse_model_1.Warehouse.create(params)
+                .then(() => {
+                res.status(201).json({
+                    status: true,
+                    message: "Data warehouse successfully added.",
+                });
+            })
+                .catch((err) => {
+                res.status(500).json({
+                    status: false,
+                    message: err.message,
+                });
             });
-        });
+        }
     }
     update(req, res) {
         const warehouseId = parseInt(req.params.id);
@@ -111,7 +181,7 @@ class WarehouseController {
                         .catch((err) => {
                         res.status(500).json({
                             status: false,
-                            message: "Data failed to update",
+                            message: err.message,
                         });
                     });
                 }

@@ -12,6 +12,10 @@ Warehouse.init({
         autoIncrement: true,
         primaryKey: true,
     },
+    branch_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+    },
     warehouse_code: {
         type: sequelize_1.DataTypes.STRING(20),
         allowNull: true,
@@ -53,4 +57,5 @@ Warehouse.init({
     tableName: "warehouse",
     sequelize: database_1.db,
 });
+Warehouse.sync().then(() => console.log("Table successfully added."));
 //# sourceMappingURL=warehouse.model.js.map
