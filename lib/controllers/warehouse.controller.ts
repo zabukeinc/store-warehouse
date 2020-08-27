@@ -129,15 +129,14 @@ export class WarehouseController {
   public create(req: Request, res: Response) {
     const params: WarehouseInterface = req.body;
     // Logic for Add Store + Generate Warehouse
-    if (params.is_store == true) {
+    if (params.is_store) {
       Warehouse.create<Warehouse>(params)
         .then((warehouse: Warehouse) => {
           params.warehouse_code = `${warehouse.warehouse_code}-Warehouse`;
-          Warehouse.create<Warehouse>(params).then(() => {
-            res.status(201).json({
-              status: true,
-              message: "Data store and warehouse sucessfully added",
-            });
+          Warehouse.create<Warehouse>(params);
+          res.status(201).json({
+            status: true,
+            message: "Data store and warehouse sucessfully added",
           });
         })
         .catch((err: Error) => {
@@ -253,8 +252,7 @@ export class WarehouseController {
               .catch((err: Error) =>
                 res.status(500).json({
                   status: false,
-                  message: "Something went wrong",
-                  error: err,
+                  message: err.message,
                 })
               );
           } else {
@@ -267,7 +265,7 @@ export class WarehouseController {
     } else {
       res.status(500).json({
         status: false,
-        message: "Something went wrong",
+        message: "Input must be a number",
       });
     }
   }

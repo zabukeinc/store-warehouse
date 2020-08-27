@@ -72,7 +72,7 @@ Warehouse.init(
     },
     is_store: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
     },
     deletedAt: {
       type: DataTypes.DATE,
