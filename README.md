@@ -19,7 +19,22 @@ Get all data warehouse (GET) : <i>http://localhost:3000/api/warestore/warehouse<
 <b>GET By warehouse_code</b> <br>
 Get specific data store or warehouse (GET) : <i>http://localhost:3000/api/warestore/:id</i>
 <br><br>
-(body: x-www-form-urlencoded) <br>
+<b>POST Data</b>
+<br>
+example input from postman <br>
+<i>
+{
+    "branch_id":79,
+    "warehouse_code":"Alone",
+    "location_name":"Cimahi",
+    "address":"Gunung Batu",
+    "phone":"083123",
+    "status:true,
+    "is_store":false"
+}
+</i>
+
+<br>
 Insert data Store + Auto generated data warehouse using params <i>is_store:true</i>(POST) : <i>http://localhost:3000/api/warestore/</i>
 <br>
 Insert data Warehouse using params <i>is_store:false</i>(POST) : <i>http://localhost:3000/api/warestore/</i>
