@@ -30,7 +30,7 @@ example input from postman <br>
     "address":"Gunung Batu",
     "phone":"083123",
     "status:true,
-    "is_store":false"
+    "is_store":false
 }
 </i>
 
