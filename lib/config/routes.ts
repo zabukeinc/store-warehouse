@@ -2,7 +2,7 @@ import { WarehouseController } from "../controllers/warehouse.controller";
 import { Application, Response, Request } from "express";
 
 export class Routes {
-  public warehoueController: WarehouseController = new WarehouseController();
+  public warehouseController: WarehouseController = new WarehouseController();
 
   public routes(app: Application): void {
     /**
@@ -10,21 +10,19 @@ export class Routes {
      */
     app
       .route("/api/warestore")
-      .get(this.warehoueController.index)
-      .post(this.warehoueController.create);
+      .get(this.warehouseController.index)
+      .post(this.warehouseController.create);
     app
       .route("/api/warestore/store")
-      .get(this.warehoueController.showOnlyStore);
+      .get(this.warehouseController.showOnlyStore);
     app
       .route("/api/warestore/warehouse")
-      .get(this.warehoueController.showOnlyWarehouse);
+      .get(this.warehouseController.showOnlyWarehouse);
     app
       .route("/api/warestore/:id")
-      .get(this.warehoueController.show)
-      .put(this.warehoueController.update)
-      .delete(this.warehoueController.delete);
-
-    // get data by types
+      .get(this.warehouseController.show)
+      .put(this.warehouseController.update)
+      .delete(this.warehouseController.delete);
 
     app.all("*", function (req: Request, res: Response) {
       res.status(404).send({
