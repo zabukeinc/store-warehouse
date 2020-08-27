@@ -129,7 +129,7 @@ export class WarehouseController {
   public create(req: Request, res: Response) {
     const params: WarehouseInterface = req.body;
     // Logic for Add Store + Generate Warehouse
-    if ((params.is_store = true)) {
+    if (params.is_store == true) {
       Warehouse.create<Warehouse>(params)
         .then((warehouse: Warehouse) => {
           params.warehouse_code = `${warehouse.warehouse_code}-Warehouse`;
